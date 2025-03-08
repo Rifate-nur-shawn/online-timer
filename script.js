@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply CSS styles using JavaScript
+    applyStyles();
+    
     // DOM elements
     const datePicker = document.getElementById('date-picker');
     const setDateBtn = document.getElementById('set-date');
@@ -208,68 +211,273 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 8000);
     }
     
-    // Add this to the CSS dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+    // Function to apply all styles
+    function applyStyles() {
+        // Create style element
+        const style = document.createElement('style');
+        
+        // Define CSS variables
+        const cssVariables = {
+            primaryColor: '#4a00e0',
+            secondaryColor: '#8e2de2',
+            bgColor: '#121212',
+            textColor: '#ffffff',
+            blockBg: 'rgba(255, 255, 255, 0.05)',
+            accentColor: '#00e6ff'
+        };
+        
+        // CSS rules
+        const cssRules = `
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Montserrat', sans-serif;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            body {
+                background: linear-gradient(135deg, ${cssVariables.bgColor}, #1f1f1f);
+                color: ${cssVariables.textColor};
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-        }
-        
-        .highlight {
-            color: var(--accent-color) !important;
-            transform: scale(1.1);
-            transition: all 0.3s ease;
-        }
-        
-        .countdown-finished {
-            animation: pulse 1.5s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 10px rgba(0, 230, 255, 0.5);
+
+            .container {
+                width: 90%;
+                max-width: 900px;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                padding: 2rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
             }
-            100% {
-                box-shadow: 0 0 30px rgba(0, 230, 255, 0.8), 0 0 60px rgba(74, 0, 224, 0.5);
+
+            h1 {
+                text-align: center;
+                margin-bottom: 2rem;
+                background: linear-gradient(to right, ${cssVariables.primaryColor}, ${cssVariables.accentColor});
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 2.5rem;
             }
-        }
-        
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-        
-        .confetti {
-            position: absolute;
-            top: -10px;
-            width: 10px;
-            height: 10px;
-            opacity: 0.7;
-            animation: confettiFall linear forwards;
-        }
-        
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
+
+            .settings {
+                margin-bottom: 2.5rem;
+                background: ${cssVariables.blockBg};
+                border-radius: 12px;
+                padding: 1.5rem;
+            }
+
+            .date-settings h3 {
+                margin-bottom: 1rem;
+                font-weight: 400;
+                color: ${cssVariables.accentColor};
+            }
+
+            .input-group {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            input[type="datetime-local"] {
+                flex: 1;
+                padding: 0.8rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                color: white;
+                font-size: 1rem;
+            }
+
+            button {
+                padding: 0.8rem 1.5rem;
+                border: none;
+                border-radius: 8px;
+                background: linear-gradient(135deg, ${cssVariables.primaryColor}, ${cssVariables.secondaryColor});
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(74, 0, 224, 0.4);
+            }
+
+            .reset-btn {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .countdown-display {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .time-block {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem;
+                background: ${cssVariables.blockBg};
+                border-radius: 12px;
+                min-width: 110px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .time-block::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(to right, ${cssVariables.primaryColor}, ${cssVariables.accentColor});
+            }
+
+            .time {
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+                color: white;
+            }
+
+            .label {
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .timer-info {
+                text-align: center;
+                margin-top: 1rem;
+                padding: 1rem;
+                background: ${cssVariables.blockBg};
+                border-radius: 12px;
+                font-size: 1.1rem;
+            }
+
+            #timer-status {
+                color: ${cssVariables.accentColor};
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .highlight {
+                color: ${cssVariables.accentColor} !important;
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+            }
+            
+            .countdown-finished {
+                animation: pulse 1.5s infinite alternate;
+            }
+            
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 10px rgba(0, 230, 255, 0.5);
+                }
+                100% {
+                    box-shadow: 0 0 30px rgba(0, 230, 255, 0.8), 0 0 60px rgba(74, 0, 224, 0.5);
+                }
+            }
+            
+            .confetti-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 100;
+            }
+            
+            .confetti {
+                position: absolute;
+                top: -10px;
+                width: 10px;
+                height: 10px;
                 opacity: 0.7;
+                animation: confettiFall linear forwards;
             }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
+            
+            @keyframes confettiFall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
             }
-        }
-    `;
-    document.head.appendChild(style);
+
+            @media (max-width: 768px) {
+                .countdown-display {
+                    gap: 0.7rem;
+                }
+                
+                .time-block {
+                    min-width: 90px;
+                    padding: 1rem;
+                }
+                
+                .time {
+                    font-size: 2rem;
+                }
+                
+                .label {
+                    font-size: 0.8rem;
+                }
+                
+                .input-group {
+                    flex-direction: column;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .time-block {
+                    min-width: 70px;
+                    padding: 0.8rem;
+                }
+                
+                .time {
+                    font-size: 1.5rem;
+                }
+                
+                h1 {
+                    font-size: 1.8rem;
+                }
+            }
+        `;
+        
+        // Add CSS rules to the style element
+        style.textContent = cssRules;
+        
+        // Append the style element to the document head
+        document.head.appendChild(style);
+    }
+    
+    // The previous style.textContent at the bottom is now included in the applyStyles function above
 });
