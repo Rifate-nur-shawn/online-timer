@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Cosmic Countdown Timer</h1>
+        
+        <div class="settings">
+            <div class="date-settings">
+                <h3>Set Your Target Date</h3>
+                <div class="input-group">
+                    <input type="datetime-local" id="date-picker">
+                    <button id="set-date">Set Countdown</button>
+                </div>
+                <button id="reset" class="reset-btn">Reset Timer</button>
+            </div>
+        </div>
+
+        <div class="countdown-display">
+            <div class="time-block">
+                <div class="time" id="years">00</div>
+                <div class="label">Years</div>
+            </div>
+            <div class="time-block">
+                <div class="time" id="months">00</div>
+                <div class="label">Months</div>
+            </div>
+            <div class="time-block">
+                <div class="time" id="days">00</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-block">
+                <div class="time" id="hours">00</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-block">
+                <div class="time" id="minutes">00</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-block">
+                <div class="time" id="seconds">00</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+        
+        <div class="timer-info">
+            <span id="timer-status">Set a date to start counting down</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
